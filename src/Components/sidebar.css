@@ -82,4 +82,7 @@
     margin-bottom: 5px;
     padding: 5px;
 }
+.sidebar__recentItem > p:hover{
+    color: black;
+}
 
