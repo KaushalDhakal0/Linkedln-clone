@@ -58,10 +58,11 @@
 .sidebar__top > h4{
     color: gray;
     font-size: 12px;
+    /* font-weight: 200; */
 
 }
 .sidebar__top >h2 {
-    font-size: 10px;
+    font-size: 18px;
 }
 .sidebar__button{
     text-align: left;
@@ -72,4 +73,13 @@
     margin-top: 10px;
 }
 
+.sidebar__recentItem{
+    display: flex;
+    font-size: 13px;
+    color: gray;
+    font-weight: bolder;
+    cursor: pointer;
+    margin-bottom: 5px;
+    padding: 5px;
+}
 
