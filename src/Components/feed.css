@@ -28,6 +28,7 @@
 
 .feed__input >form > input {
     border:none ;
+    /* height: 200px; */
     flex: 1;
     margin-left: 10px;
     outline-width: 0;

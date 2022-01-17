@@ -6,6 +6,7 @@ import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import { InputOption } from "./InputOption";
+import { Post } from "./Post";
 
 export const Feed = () => {
   return (
@@ -29,6 +30,8 @@ export const Feed = () => {
           />
         </div>
       </div>
+      {/* Posts below here are rendered */}
+      <Post />
     </div>
   );
 };
