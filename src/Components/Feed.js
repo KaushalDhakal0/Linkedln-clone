@@ -31,7 +31,12 @@ export const Feed = () => {
         </div>
       </div>
       {/* Posts below here are rendered */}
-      <Post />
+      <Post
+        name="Kaushal Dhakal"
+        description="this works."
+        message="This is a dummy test post"
+        imgUrl="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_1280.png"
+      />
     </div>
   );
 };
