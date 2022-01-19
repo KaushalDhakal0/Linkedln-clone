@@ -24,7 +24,7 @@ export const Feed = () => {
     getDocs(colRef).then((snap) => {
       setPosts(
         snap.docs.map((doc) => {
-          console.log(doc);
+          console.log(doc.data());
           return { id: doc.id, ...doc.data() };
         })
       );
@@ -36,8 +36,8 @@ export const Feed = () => {
     const colRef = collection(db, "posts");
     await addDoc(colRef, {
       timestamp: serverTimestamp(),
-      name: "Jonny Walker",
-      desc: "Software developer",
+      name: "John Cena",
+      desc: "Student",
       message: input,
       imgUrl:
         "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_1280.png",
@@ -73,7 +73,7 @@ export const Feed = () => {
         </div>
       </div>
       {/* Posts below here are rendered */}
-      {posts &&
+      {posts.length > 0 ? (
         posts.map((post) => {
           return (
             <Post
@@ -84,7 +84,10 @@ export const Feed = () => {
               imgUrl={post.imgUrl}
             />
           );
-        })}
+        })
+      ) : (
+        <h1>No posts available.Please post something to see posts...</h1>
+      )}
     </div>
   );
 };
