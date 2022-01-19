@@ -1,8 +1,8 @@
 // v9 compat packages are API compatible with v8 code
-import firebase from "firebase/compat/app";
+//import firebase from "firebase/compat/app";
 import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 const firebaseConfig = {
   apiKey: "AIzaSyCJG81mbR9LkAXQRT_NkpjHKvHkbokZOtg",
   authDomain: "linkedln-clone-99719.firebaseapp.com",
@@ -13,7 +13,7 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseApp);
+const db = getFirestore();
 const auth = getAuth(firebaseApp);
 
 export { db, auth };

@@ -8,48 +8,35 @@ import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import { InputOption } from "./InputOption";
 import { Post } from "./Post";
 import { db } from "../firebase";
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { collection, doc, getDocs, addDoc } from "firebase/firestore";
 
 export const Feed = () => {
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
-  const connectDb = async () => {
-    const q = query(collection(db, "posts"));
-    const snapShot = await getDocs(q);
-    setPosts(
-      snapShot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data(),
-      }))
-    );
-    console.log(posts);
-    // snapShot.((doc) => {
-    //   console.log("db connected");
-    //   console.log(doc.data);
-    // });
-  };
-
   useEffect(() => {
-    connectDb();
-    console.log(posts);
+    const colRef = collection(db, "posts");
+    getDocs(colRef).then((snap) => {
+      setPosts(
+        snap.docs.map((doc) => {
+          console.log(doc.data());
+          return { id: doc.id, ...doc.data() };
+        })
+      );
+    });
   }, []);
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    // db.collection(
-    //   "posts".add({
-    //     name: "Kaushal..",
-    //     description: "dummy desc..",
-    //     massage: input,
-    //   })
-    // );
+    const colRef = collection(db, "posts");
+    await addDoc(colRef, {
+      name: "doicka",
+      desc: "Japan",
+      message: input,
+      imgUrl:
+        "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_1280.png",
+    });
+    setInput("");
   };
 
   return (
@@ -58,7 +45,11 @@ export const Feed = () => {
         <div className="feed__input">
           <CreateIcon />
           <form>
-            <input type="text" onChange={(e) => setInput(e.target.value)} />
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
             <button type="submit" onClick={handleClick}>
               Send
             </button>
@@ -76,17 +67,18 @@ export const Feed = () => {
         </div>
       </div>
       {/* Posts below here are rendered */}
-      {posts.map((post) => {
-        return (
-          <Post
-            key={post.imgUrl}
-            name={post.name}
-            description={post.desc}
-            message={post.message}
-            imgUrl={post.imgUrl}
-          />
-        );
-      })}
+      {posts &&
+        posts.map((post) => {
+          return (
+            <Post
+              key={post.id}
+              name={post.name}
+              description={post.desc}
+              message={post.message}
+              imgUrl={post.imgUrl}
+            />
+          );
+        })}
     </div>
   );
 };
