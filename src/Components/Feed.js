@@ -8,7 +8,12 @@ import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import { InputOption } from "./InputOption";
 import { Post } from "./Post";
 import { db } from "../firebase";
-import { collection, doc, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 
 export const Feed = () => {
   const [input, setInput] = useState("");
@@ -19,7 +24,7 @@ export const Feed = () => {
     getDocs(colRef).then((snap) => {
       setPosts(
         snap.docs.map((doc) => {
-          console.log(doc.data());
+          console.log(doc);
           return { id: doc.id, ...doc.data() };
         })
       );
@@ -30,8 +35,9 @@ export const Feed = () => {
     e.preventDefault();
     const colRef = collection(db, "posts");
     await addDoc(colRef, {
-      name: "doicka",
-      desc: "Japan",
+      timestamp: serverTimestamp(),
+      name: "Jonny Walker",
+      desc: "Software developer",
       message: input,
       imgUrl:
         "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_1280.png",
