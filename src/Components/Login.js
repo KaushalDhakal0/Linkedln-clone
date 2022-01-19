@@ -14,12 +14,27 @@ export const Login = () => {
   const [name, setName] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const dispatch = useDispatch();
+
   const loginToApp = (e) => {
     e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userAuth) => {
+        console.log(userAuth);
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+            displayName: userAuth.user.displayName,
+            photoURL: userAuth.user.profilePic,
+          })
+        );
+      })
+      .catch((err) => console.log(err));
   };
+
   const register = () => {
-    if (!name) {
-      alert("Please enter full name");
+    if (!name || !email || !password) {
+      alert("complete the form...");
     }
     createUserWithEmailAndPassword(auth, email, password)
       .then((userAuth) => {

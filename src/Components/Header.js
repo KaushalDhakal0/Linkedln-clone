@@ -4,6 +4,7 @@ import "./Header.css";
 // import HomeIcon from "@material-ui/icons/Home";
 // import BusinessCenterIcon from "@material-ui/icons/Business";
 import HeaderOption from "./HeaderOption";
+import { selectUser } from "../features/userSlice";
 import {
   BusinessCenter,
   SupervisorAccount,
@@ -12,7 +13,19 @@ import {
   Home,
   Chat,
 } from "@material-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../features/userSlice";
+import { auth } from "../firebase";
+import { Button } from "@material-ui/core";
+
 export const Header = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+
+  const logoutofApp = () => {
+    dispatch(logout());
+    auth.signOut();
+  };
   return (
     <div className="header">
       <div className="header__left">
@@ -36,6 +49,7 @@ export const Header = () => {
           title="Me"
         />
       </div>
+      {user && <button onClick={logoutofApp}>Sign Out</button>}
     </div>
   );
 };
