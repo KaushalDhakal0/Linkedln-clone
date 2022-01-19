@@ -33,15 +33,17 @@ export const Feed = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const colRef = collection(db, "posts");
-    await addDoc(colRef, {
+    const dummyVal = {
       timestamp: serverTimestamp(),
       name: "John Cena",
       desc: "Student",
       message: input,
       imgUrl:
         "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_1280.png",
-    });
+    };
+    const colRef = collection(db, "posts");
+    await addDoc(colRef, dummyVal);
+    setPosts([...posts, dummyVal]);
     setInput("");
   };
 
