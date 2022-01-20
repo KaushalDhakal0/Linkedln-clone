@@ -6,6 +6,9 @@ import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
 import ChatOutlinedIcon from "@material-ui/icons/ChatOutlined";
 import ShareOutlinedIcon from "@material-ui/icons/ShareOutlined";
 import SendOutlinedIcon from "@material-ui/icons/SendOutlined";
+// import { useSelector } from "react-redux";
+// import { selectUser } from "../features/userSlice";
+
 export const Post = ({ name, description, message, imgUrl }) => {
   return (
     <div className="post">

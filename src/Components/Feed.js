@@ -14,11 +14,15 @@ import {
   addDoc,
   serverTimestamp,
 } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 export const Feed = () => {
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
+  const user = useSelector(selectUser);
+  // console.log(user);
   useEffect(() => {
     const colRef = collection(db, "posts");
     getDocs(colRef).then((snap) => {
@@ -35,7 +39,7 @@ export const Feed = () => {
     e.preventDefault();
     const dummyVal = {
       timestamp: serverTimestamp(),
-      name: "John Cena",
+      name: user.displayName,
       desc: "Student",
       message: input,
       imgUrl:

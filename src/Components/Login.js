@@ -29,7 +29,7 @@ export const Login = () => {
           })
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err));
   };
 
   const register = () => {
