@@ -87,7 +87,7 @@ export const Feed = () => {
               name={post.name}
               description={post.desc}
               message={post.message}
-              imgUrl={post.imgUrl}
+              imgUrl={post.name[0]}
             />
           );
         })

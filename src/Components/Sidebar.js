@@ -6,7 +6,7 @@ import "./sidebar.css";
 
 export const Sidebar = () => {
   const user = useSelector(selectUser);
-  console.log(user);
+  // console.log(user);
 
   const recentItem = (title) => (
     <div className="sidebar__recentItem">
