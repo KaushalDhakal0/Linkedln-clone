@@ -16,23 +16,25 @@ import {
 } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
+import FlipMove from "react-flip-move";
 
 export const Feed = () => {
+  const user = useSelector(selectUser);
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
-  const user = useSelector(selectUser);
   // console.log(user);
   useEffect(() => {
     const colRef = collection(db, "posts");
     getDocs(colRef).then((snap) => {
       setPosts(
         snap.docs.map((doc) => {
-          console.log(doc.data());
+          // console.log(doc.data());
           return { id: doc.id, ...doc.data() };
         })
       );
     });
+    // console.log(user);
   }, []);
 
   const handleClick = async (e) => {
@@ -40,10 +42,9 @@ export const Feed = () => {
     const dummyVal = {
       timestamp: serverTimestamp(),
       name: user.displayName,
-      desc: "Student",
+      desc: "LinkdenPost",
       message: input,
-      imgUrl:
-        "https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_1280.png",
+      imgUrl: user.photoUrl,
     };
     const colRef = collection(db, "posts");
     await addDoc(colRef, dummyVal);
@@ -79,8 +80,28 @@ export const Feed = () => {
         </div>
       </div>
       {/* Posts below here are rendered */}
-      {posts.length > 0 ? (
-        posts.map((post) => {
+      <FlipMove>
+        {posts.length > 0 ? (
+          posts.map((post) => {
+            console.log(post);
+            return (
+              <Post
+                key={post.id}
+                name={post.name}
+                description={post.desc}
+                message={post.message}
+                imgUrl="https://hhh.com"
+              />
+            );
+          })
+        ) : (
+          <h1 key={12}>
+            No posts available.Please post something to see posts...
+          </h1>
+        )}
+      </FlipMove>
+      {/* <FlipMove>
+        {posts.map((post) => {
           return (
             <Post
               key={post.id}
@@ -90,10 +111,8 @@ export const Feed = () => {
               imgUrl={post.name[0]}
             />
           );
-        })
-      ) : (
-        <h1>No posts available.Please post something to see posts...</h1>
-      )}
+        })}
+      </FlipMove> */}
     </div>
   );
 };

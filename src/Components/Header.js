@@ -44,10 +44,12 @@ export const Header = () => {
         <HeaderOption Icon={BusinessCenter} title="Jobs" />
         <HeaderOption Icon={Chat} title="Messaging" />
         <HeaderOption Icon={Notifications} title="Notifications" />
-        <HeaderOption
-          avatar="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_1280.png"
-          title="Me"
-        />
+        {user && (
+          <HeaderOption
+            avatar="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659652_1280.png"
+            title="Me"
+          />
+        )}
       </div>
       {user && <button onClick={logoutofApp}>Sign Out</button>}
     </div>

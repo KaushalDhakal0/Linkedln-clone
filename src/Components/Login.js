@@ -3,6 +3,7 @@ import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import "./login.css";
 import { useDispatch } from "react-redux";
@@ -19,13 +20,13 @@ export const Login = () => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userAuth) => {
-        console.log(userAuth);
+        console.log(userAuth.user.displayName);
         dispatch(
           login({
             email: userAuth.user.email,
             uid: userAuth.user.uid,
             displayName: userAuth.user.displayName,
-            photoURL: userAuth.user.profilePic,
+            photoURL: userAuth.user.photoURL,
           })
         );
       })
@@ -38,22 +39,32 @@ export const Login = () => {
     }
     createUserWithEmailAndPassword(auth, email, password)
       .then((userAuth) => {
-        userAuth.user.displayName = name;
-        userAuth.user.photoURL = profilePic;
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: profilePic,
+        }).then(() => {
+          console.log("updated");
+        });
+
         dispatch(
           login({
             email: userAuth.user.email,
             uid: userAuth.user.uid,
             displayName: userAuth.user.displayName,
-            photoURL: userAuth.user.profilePic,
+            photoURL: userAuth.user.photoURL,
           })
         );
+        // console.log(userAuth.user.displayName);
       })
       .catch((err) => alert(err));
   };
+
   return (
     <div className="login">
-      <img src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Logo.wine.svg" />
+      <img
+        src="https://www.logo.wine/a/logo/LinkedIn/LinkedIn-Logo.wine.svg"
+        alt="LinkdeLnImg"
+      />
       <form>
         <input
           value={name}
