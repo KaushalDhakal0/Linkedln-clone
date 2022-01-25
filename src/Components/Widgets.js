@@ -28,6 +28,11 @@ const Widgets = () => {
       {NewsArticle("BiTCOIN HITS HIGH", "Top news - 9877 readers")}
       {NewsArticle("BiTCOIN HITS HIGH", "Top news - 9877 readers")}
       {NewsArticle("BiTCOIN HITS HIGH", "Top news - 9877 readers")}
+      {NewsArticle("BiTCOIN HITS HIGH", "Top news - 9877 readers")}
+      {NewsArticle("BiTCOIN HITS HIGH", "Top news - 9877 readers")}
+      {NewsArticle("BiTCOIN HITS HIGH", "Top news - 9877 readers")}
+      {NewsArticle("BiTCOIN HITS HIGH", "Top news - 9877 readers")}
+      {NewsArticle("BiTCOIN HITS HIGH", "Top news - 9877 readers")}
     </div>
   );
 };
