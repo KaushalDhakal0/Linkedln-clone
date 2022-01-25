@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Header } from "./Components/Header";
-import { Widgets } from "./Components/Widgets";
+import Widgets from "./Components/Widgets";
 import { Sidebar } from "./Components/Sidebar";
 import { Feed } from "./Components/Feed";
 import "./App.css";
